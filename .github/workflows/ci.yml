@@ -1,0 +1,15 @@
+name: CI # Name of the job in GIthub
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: #Allows other workflows inside the same repo to use this
+
+jobs:
+  java-test:
+    uses: ./.github/workflows/java-test-reusable.yml
+
+  docker-ci:
+    needs: java-test
+    uses: ./.github/workflows/docker-ci-reusable.yml
